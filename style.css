@@ -1,0 +1,101 @@
+body {
+    background-color: blanchedalmond;
+    margin:0 30%;
+    padding:0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+.title {
+    font-size: 72px;
+    font-weight: bold;
+    text-align: center;
+    color: goldenrod;
+}
+.buttons {
+    display: flex;
+    justify-content: space-around;
+    gap: 24px;
+    padding-top: 50px;
+}
+
+.user-choice {
+    width: 200px;
+    height: 150px;
+    cursor: pointer;
+    background-color: goldenrod;
+    border-radius: 10px;
+    font-size: 96px;
+    font-weight: bold;
+    color: #121416;
+    border: 10px solid transparent;
+}
+
+.user-choice:hover {
+    border: 10px solid #e5c062;
+}
+
+.disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.user-choice p {
+    font-size: 18px;
+    margin: 0;
+}
+
+.play-round-result {
+    height: 50px;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    padding-top: 24px;
+    color: #121416;
+}
+
+.score {
+    padding-top: 30px;
+    display: flex;
+    gap: 50px;
+    justify-content: center;   
+}
+
+.score-title {
+    margin: 0;
+    font-size: 48px; 
+}
+
+.separator {
+    font-size: 24px;
+    padding-top: 18px;
+}
+
+.score-card, .footer {
+    text-align: center;
+    font-size: 76px;
+    font-weight: bold;
+    color: goldenrod;
+    margin: 0;
+}
+
+.final-result {
+    margin-top: 20px;
+    margin-bottom: 0;
+}
+
+.restart {
+    cursor: pointer;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-size: 24px;
+    font-weight: normal;
+    color: #121416;
+    background-color: transparent;
+    border: 5px solid goldenrod;
+    display: none;
+}
+
+.restart:hover {
+    background-color: goldenrod;
+    color: #f1f2f1;
+    font-weight: bold;
+}

@@ -5,8 +5,33 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock, Paper and Scissors Game</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="content">
+        <h1 class="title">Click away!</h1>
+    </div>
+    <div class="buttons">
+        <button class="user-choice" value="Rock">&#129704;<p>Rock</p></button>
+        <button class="user-choice" value="Paper">&#128195;<p>Paper</p></button>
+        <button class="user-choice" value="Scissors">&#9986;&#65039;<p>Scissors</p></button>
+    </div>
+    <div class="play-round-result"></div>
+    <div class="score">
+        <div class="human">
+            <p class="score-title">Human</p>
+            <p class="human-score score-card">0</p>
+        </div>
+        <div class="separator">Vs</div>
+        <div class="machine">
+            <p class="score-title">Machine</p>
+            <p class="machine-score score-card">0</p>
+        </div>
+    </div>
+    <div class="footer">
+        <p class="final-result"></p>
+        <button class="restart">Restart</button>
+    </div>
 </body>
 <script type = "text/javascript" src="game.js"></script>
 </html>
