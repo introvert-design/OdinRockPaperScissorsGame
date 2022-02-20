@@ -2,8 +2,8 @@ const TOOLS = ["Rock", "Paper", "Scissors"]
 let machineScore = 0;
 let humanScore = 0;
 
-const buttons = () => document.querySelectorAll('.user-choice');
-const restart = () => document.querySelector('.restart');
+const buttons = document.querySelectorAll('.user-choice');
+const restart = document.querySelector('.restart');
 
 const computerPlay = () => TOOLS[Math.floor(Math.random()*3)];
 
@@ -51,10 +51,10 @@ function playRound(event) {
         }
     }
     if (machineScore >= 5 || humanScore >= 5) {
-        buttons().forEach(button => disableButton(button));
-        restart().style.display = 'inline-block';
+        buttons.forEach(button => disableButton(button));
+        restart.style.display = 'inline-block';
     }
 }
 
-buttons().forEach(button => button.addEventListener('click', playRound));
-restart().addEventListener('click', resetGame);
+buttons.forEach(button => button.addEventListener('click', playRound));
+restart.addEventListener('click', resetGame);
