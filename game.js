@@ -1,60 +1,83 @@
-const TOOLS = ["Rock", "Paper", "Scissors"]
+const TOOLS = ["rock", "paper", "scissors"]
 let machineScore = 0;
 let humanScore = 0;
 
 const buttons = document.querySelectorAll('.user-choice');
 const restart = document.querySelector('.restart');
 
-const computerPlay = () => TOOLS[Math.floor(Math.random()*3)];
+const getComputerChoice = () => TOOLS[Math.floor(Math.random()*3)];
+
+const getPlayerChoice = (event) => {
+    let playerSelection = event.target.value;
+    if (playerSelection) {
+        return playerSelection.toLowerCase();
+    }
+    return event.target.textContent.toLowerCase();
+}
+
+const isPlayerChoiceValid = (playerSelection) => 
+    playerSelection === "rock" || playerSelection === "paper" || playerSelection === "scissors";
+
+function displayResult(elt, message) {
+    const selectElement = document.querySelector(elt)
+    selectElement.textContent = message;
+}
 
 function disableButton(button) {
     button.classList.add('disabled');
     button.disabled = true;
 }
 
-function displayResult(elt, content) {
-    const selectElement = document.querySelector(elt)
-    selectElement.textContent = content;
+function disableGame() {
+    buttons.forEach(button => disableButton(button));
+    restart.style.display = 'inline-block';
 }
 
-function resetGame() {
-    location.reload();
+function checkWhetherGameOver(machineScore, humanScore) {
+    if (machineScore >= 5) {
+        displayResult('.final-result', 'You lost! Game Over...');
+        disableGame();
+    }
+    else if (humanScore >= 5) {
+        displayResult('.final-result', 'You beat the crap out of machines!');
+        disableGame();
+    }
 }
 
 function playRound(event) {
-    computerSelection = computerPlay();
-    playerSelection = event.target.value;
-    if (playerSelection == computerSelection) {
-        content = `You Tie! ${playerSelection} cancels ${computerSelection}`;
-        displayResult('.play-round-result', content)
+    let playerSelection = getPlayerChoice(event);
+    let computerSelection = getComputerChoice();
+    if (!isPlayerChoiceValid(playerSelection)) {
+        displayResult('.play-round-result', `Invalid Input`);
+        return;
     }
-    else if ((playerSelection == TOOLS[0] && computerSelection == TOOLS[1]) 
+    if (computerSelection == playerSelection) {
+        displayResult('.play-round-result', `You Tie! ${playerSelection} cancels ${computerSelection}`);
+        return;
+    }
+    if ((playerSelection == TOOLS[0] && computerSelection == TOOLS[1]) 
         || (playerSelection == TOOLS[1] && computerSelection == TOOLS[2])
         || (playerSelection == TOOLS[2] && computerSelection == TOOLS[0])) {
-            content = `You Lose! ${computerSelection} beats ${playerSelection}`;
-            displayResult('.play-round-result', content);
-            machineScore++;
-            displayResult('.machine-score', machineScore);
-            if (machineScore === 5) {
-                content = 'You lost! Game Over...';
-                displayResult('.final-result', content);
-            }
+        displayResult('.play-round-result', `You Lose! ${computerSelection} beats ${playerSelection}`);
+        return 1;
     }
-    else {
-        content = `You Win! ${playerSelection} beats ${computerSelection}`;
-        displayResult('.play-round-result', content);
-        humanScore++;
-        displayResult('.human-score', humanScore);
-        if (humanScore === 5) {
-            content = 'You beat the crap out of machines!';
-            displayResult('.final-result', content);
-        }
-    }
-    if (machineScore >= 5 || humanScore >= 5) {
-        buttons.forEach(button => disableButton(button));
-        restart.style.display = 'inline-block';
-    }
+    displayResult('.play-round-result', `You Win! ${playerSelection} beats ${computerSelection}`);
+    return 2;
 }
 
-buttons.forEach(button => button.addEventListener('click', playRound));
+function game(event) {
+    let playRoundResult = playRound(event);
+    if (playRoundResult === 1) {
+        displayResult('.machine-score', ++machineScore);
+    }
+    if (playRoundResult === 2) {
+        displayResult('.human-score', ++humanScore);
+    }
+    checkWhetherGameOver(machineScore, humanScore);
+}
+
+buttons.forEach(button => button.addEventListener('click', game));
+
+const resetGame = () => location.reload();
+
 restart.addEventListener('click', resetGame);
